@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 1641px;
+            height: 920px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/20210426_ArmoniaRESARMONIA_3.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[20.711164152759192,-87.01710488371596],[20.718395912963533,-87.00419327698948]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleSatellite_0');
+        map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
+        var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_GoogleSatellite_0;
+        map.addLayer(layer_GoogleSatellite_0);
+        map.createPane('pane_20210426_Armonia_Elev_Predio_1');
+        map.getPane('pane_20210426_Armonia_Elev_Predio_1').style.zIndex = 401;
+        var img_20210426_Armonia_Elev_Predio_1 = 'data/20210426_Armonia_Elev_Predio_1.png';
+        var img_bounds_20210426_Armonia_Elev_Predio_1 = [[20.710952389037097,-87.01590814976784],[20.718603799603944,-87.0053875601612]];
+        var layer_20210426_Armonia_Elev_Predio_1 = new L.imageOverlay(img_20210426_Armonia_Elev_Predio_1,
+                                              img_bounds_20210426_Armonia_Elev_Predio_1,
+                                              {pane: 'pane_20210426_Armonia_Elev_Predio_1'});
+        bounds_group.addLayer(layer_20210426_Armonia_Elev_Predio_1);
+        map.addLayer(layer_20210426_Armonia_Elev_Predio_1);
+        map.createPane('pane_20210426_Armonia_Unidades_Ajuste_2');
+        map.getPane('pane_20210426_Armonia_Unidades_Ajuste_2').style.zIndex = 402;
+        var img_20210426_Armonia_Unidades_Ajuste_2 = 'data/20210426_Armonia_Unidades_Ajuste_2.png';
+        var img_bounds_20210426_Armonia_Unidades_Ajuste_2 = [[20.710952389037097,-87.01590814976784],[20.718603799603944,-87.0053875601612]];
+        var layer_20210426_Armonia_Unidades_Ajuste_2 = new L.imageOverlay(img_20210426_Armonia_Unidades_Ajuste_2,
+                                              img_bounds_20210426_Armonia_Unidades_Ajuste_2,
+                                              {pane: 'pane_20210426_Armonia_Unidades_Ajuste_2'});
+        bounds_group.addLayer(layer_20210426_Armonia_Unidades_Ajuste_2);
+        map.addLayer(layer_20210426_Armonia_Unidades_Ajuste_2);
+        function pop_20210426_ArmoniaRESARMONIA_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['timestamp'] !== null ? autolinker.link(feature.properties['timestamp'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['begin'] !== null ? autolinker.link(feature.properties['begin'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['end'] !== null ? autolinker.link(feature.properties['end'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['altitudeMode'] !== null ? autolinker.link(feature.properties['altitudeMode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tessellate'] !== null ? autolinker.link(feature.properties['tessellate'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['extrude'] !== null ? autolinker.link(feature.properties['extrude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['visibility'] !== null ? autolinker.link(feature.properties['visibility'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['drawOrder'] !== null ? autolinker.link(feature.properties['drawOrder'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['icon'] !== null ? autolinker.link(feature.properties['icon'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_20210426_ArmoniaRESARMONIA_3_0() {
+            return {
+                pane: 'pane_20210426_ArmoniaRESARMONIA_3',
+                opacity: 1,
+                color: 'rgba(227,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_20210426_ArmoniaRESARMONIA_3');
+        map.getPane('pane_20210426_ArmoniaRESARMONIA_3').style.zIndex = 403;
+        map.getPane('pane_20210426_ArmoniaRESARMONIA_3').style['mix-blend-mode'] = 'normal';
+        var layer_20210426_ArmoniaRESARMONIA_3 = new L.geoJson(json_20210426_ArmoniaRESARMONIA_3, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_20210426_ArmoniaRESARMONIA_3',
+            layerName: 'layer_20210426_ArmoniaRESARMONIA_3',
+            pane: 'pane_20210426_ArmoniaRESARMONIA_3',
+            onEachFeature: pop_20210426_ArmoniaRESARMONIA_3,
+            style: style_20210426_ArmoniaRESARMONIA_3_0,
+        });
+        bounds_group.addLayer(layer_20210426_ArmoniaRESARMONIA_3);
+        map.addLayer(layer_20210426_ArmoniaRESARMONIA_3);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/20210426_ArmoniaRESARMONIA_3.png" /> 20210426_Armonia RES. ARMONIA': layer_20210426_ArmoniaRESARMONIA_3,"20210426_Armonia_Unidades_Ajuste": layer_20210426_Armonia_Unidades_Ajuste_2,"20210426_Armonia_Elev_Predio": layer_20210426_Armonia_Elev_Predio_1,"Google Satellite": layer_GoogleSatellite_0,}).addTo(map);
+        setBounds();
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        </script>
+    </body>
+</html>
